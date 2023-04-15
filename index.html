@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>On-screen Keyboard Example</title>
+    <style>
+      /* Styling for the keyboard and text box */
+      #keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid #555;
+  border-radius: 10px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  width: 700px;
+  height: 270px;
+  overflow: hidden;
+}
+
+/* Style for each key button */
+.key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Style for each key button when pressed */
+.key:active {
+  background-color: #82d472;
+  transition: none;
+}
+
+/* Style for special keys */
+.special {
+  width: 90px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+
+
+
+
+      
+#textbox{
+    max-width: 800px;
+    width: 700px;
+  height: 600px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px;
+  border: 1px solid #9e9e9e;
+  border-radius: 10px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  resize: none;
+  overflow: auto; /* Add scroll bar */
+}
+      
+      #print-button {
+        margin: 10px;
+        margin-top: 20px;
+        padding: 7px;
+        font-size: 16px;
+        border: 0px solid #ccc;
+        border-radius: 3px;
+        cursor: pointer;
+        background-color: #82d472;
+      }
+    </style>
+  </head>
+  <body>
+    <div style=" position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);">
+    <textarea id="textbox"></textarea>
+    <button id="print-button" onclick="printText()">Print</button>
+    <div id="keyboard">
+        <div class="key" onclick="addText('A')">A</div>
+        <div class="key" onclick="addText('B')">B</div>
+        <div class="key" onclick="addText('C')">C</div>
+        <div class="key" onclick="addText('D')">D</div>
+        <div class="key" onclick="addText('E')">E</div>
+        <div class="key" onclick="addText('F')">F</div>
+        <div class="key" onclick="addText('G')">G</div>
+        <div class="key" onclick="addText('H')">H</div>
+        <div class="key" onclick="addText('I')">I</div>
+        <div class="key" onclick="addText('J')">J</div>
+        <div class="key" onclick="addText('K')">K</div>
+        <div class="key" onclick="addText('L')">L</div>
+        <div class="key" onclick="addText('M')">M</div>
+        <div class="key" onclick="addText('N')">N</div>
+        <div class="key" onclick="addText('O')">O</div>
+        <div class="key" onclick="addText('P')">P</div>
+        <div class="key" onclick="addText('Q')">Q</div>
+        <div class="key" onclick="addText('R')">R</div>
+        <div class="key" onclick="addText('S')">S</div>
+        <div class="key" onclick="addText('T')">T</div>
+        <div class="key" onclick="addText('U')">U</div>
+        <div class="key" onclick="addText('V')">V</div>
+        <div class="key" onclick="addText('W')">W</div>
+        <div class="key" onclick="addText('X')">X</div>
+        <div class="key" onclick="addText('Y')">Y</div>
+        <div class="key" onclick="addText('Z')">Z</div>
+        <div class="key" onclick="addText('1')">1</div>
+        <div class="key" onclick="addText('2')">2</div>
+        <div class="key" onclick="addText('3')">3</div>
+        <div class="key" onclick="addText('4')">4</div>
+        <div class="key" onclick="addText('5')">5</div>
+        <div class="key" onclick="addText('6')">6</div>
+        <div class="key" onclick="addText('7')">7</div>
+        <div class="key" onclick="addText('8')">8</div>
+        <div class="key" onclick="addText('9')">9</div>
+        <div class="key" onclick="addText('0')">0</div>
+        <div class="key" onclick="addText('-')">-</div>
+        <div class="key" onclick="addText('_')">_</div>
+        <div class="key" onclick="addText('/')">/</div>
+        <div class="key" onclick="addText('.')">.</div>
+        <div class="key" onclick="addText(',')">,</div>
+        <div class="key" onclick="addText(':')">:</div>
+        <div class="key" onclick="addText(';')">;</div>
+        <div class="key" onclick="addText('(')">(</div>
+        <div class="key" onclick="addText(')')">)</div>
+        <div class="key" onclick="addText('{')">{</div>
+        <div class="key" onclick="addText('}')">}</div>
+        <div class="key" onclick="addText('[')">[</div>
+        <div class="key" onclick="addText(']')">]</div>
+        <div class="key" onclick="addText('<')">&lt;</div>
+        <div class="key" onclick="addText('>')">&gt;</div>
+        <div class="key" onclick="addText('=')">=</div>
+        <div class="key" onclick="addText('&amp;amp;')">&amp;</div>
+        <div class="key" onclick="addText('|')">|</div>
+        <div class="key" onclick="addText('!')">!</div>
+        <div class="key" onclick="addText('?')">?</div>
+        <div class="key" onclick="addText('\'')">\'</div>
+        <div class="key" onclick="addText('\"')">\"</div>
+        <div class="key" onclick="addText('@')"> @</div>
+        <div class="key" onclick="addText('#')"> #</div>
+        <div class="key" onclick="addText('$')"> $</div>
+        <div class="key" onclick="addText('%')"> %</div>
+        <div class="key" onclick="addText('^')"> ^</div>
+        <div class="key" onclick="addText('&amp;')"> &amp;</div>
+        <div class="key" onclick="addText('*')"> *</div>
+        <div class="key" onclick="addText('+')"> +</div>
+        <div class="key" onclick="addText('~')"> ~</div>
+        <div class="key" onclick="addText('`')"> `</div>
+        <div class="key" onclick="addText()"> `</div>
+       
+    </div>
+    
+    
+</div>
+   
+    <script>
+    function addText(text) {
+  var textbox = document.getElementById("textbox");
+  textbox.value += text;
+}
+
+function printText() {
+  var textbox = document.getElementById("textbox");
+  var printContents = textbox.value ;
+  var originalContents = document.body.innerHTML;
+  document.body.innerHTML = printContents;
+  window.print();
+  document.body.innerHTML = originalContents;
+}
+
+    </script>
+  </body>
+</html>
+
